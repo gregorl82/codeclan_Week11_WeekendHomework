@@ -9,7 +9,12 @@ public class PlaneTest {
 
     @Before
     public void before(){
-        plane = new Plane();
+        plane = new Plane(PlaneType.CESSNA);
+    }
+
+    @Test
+    public void canGetPlaneType(){
+        assertEquals(PlaneType.CESSNA, plane.getPlaneType());
     }
 
     @Test
