@@ -11,6 +11,7 @@ public class FlightTest {
 
     @Before
     public void before(){
+        passenger1 = new Passenger("Gertrude Green", 1);
         plane = new Plane(PlaneType.CESSNA);
         flight = new Flight("EK028", Airport.DXB, Airport.GLA, plane, "13:00 28FEB2020");
     }
@@ -58,6 +59,24 @@ public class FlightTest {
     @Test
     public void canGetNumberOfAvailableSeats(){
         assertEquals(4, flight.getNumberOfAvailableSeats());
+    }
+
+    @Test
+    public void canBookPassengerOnToFlight(){
+        flight.bookPassenger(passenger1);
+        assertEquals(1, flight.countPassengers());
+        assertEquals(3, flight.getNumberOfAvailableSeats());
+    }
+
+    @Test
+    public void cannotBookPassengerIfFlightIsFull(){
+        flight.bookPassenger(passenger1);
+        flight.bookPassenger(passenger1);
+        flight.bookPassenger(passenger1);
+        flight.bookPassenger(passenger1);
+        flight.bookPassenger(passenger1);
+        assertEquals(4, flight.countPassengers());
+        assertEquals(0, flight.getNumberOfAvailableSeats());
     }
 
 }

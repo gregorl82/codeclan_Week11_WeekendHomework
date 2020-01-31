@@ -43,7 +43,7 @@ public class Flight {
     }
 
     public int countPassengers() {
-        return this.passengers.size();
+        return passengers.size();
     }
 
     public String getDepartureTime() {
@@ -52,5 +52,11 @@ public class Flight {
 
     public int getNumberOfAvailableSeats() {
         return plane.getCapacityFromEnum() - countPassengers();
+    }
+
+    public void bookPassenger(Passenger passenger) {
+        if(getNumberOfAvailableSeats() > 0){
+            passengers.add(passenger);
+        }
     }
 }
