@@ -6,13 +6,15 @@ public class Flight {
     private Airport destination;
     private Airport departureAirport;
     private Plane plane;
+    private String departureTime;
     private ArrayList<Passenger> passengers;
 
-    public Flight(String flightNumber, Airport destination, Airport departureAirport, Plane plane) {
+    public Flight(String flightNumber, Airport destination, Airport departureAirport, Plane plane, String departureTime) {
         this.flightNumber = flightNumber;
         this.destination = destination;
         this.departureAirport = departureAirport;
         this.plane = plane;
+        this.departureTime = departureTime;
         this.passengers = new ArrayList<>();
     }
 
@@ -42,5 +44,9 @@ public class Flight {
 
     public int countPassengers() {
         return this.passengers.size();
+    }
+
+    public String getDepartureTime() {
+        return departureTime;
     }
 }

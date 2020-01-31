@@ -12,7 +12,7 @@ public class FlightTest {
     @Before
     public void before(){
         plane = new Plane(PlaneType.CESSNA);
-        flight = new Flight("EK028", Airport.DXB, Airport.GLA, plane);
+        flight = new Flight("EK028", Airport.DXB, Airport.GLA, plane, "13:00 28FEB2020");
     }
 
     @Test
@@ -48,6 +48,11 @@ public class FlightTest {
     @Test
     public void canGetDepartureAirportName(){
         assertEquals("Glasgow", flight.getDepartureAirportNameFromEnum());
+    }
+
+    @Test
+    public void hasADepartureTime(){
+        assertEquals("13:00 28FEB2020", flight.getDepartureTime());
     }
 
 }
