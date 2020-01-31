@@ -96,9 +96,9 @@ public class FlightTest {
     @Test
     public void cannotBookPassengerIfFlightIsFull(){
         flight.bookPassenger(passenger1);
-        flight.bookPassenger(passenger1);
-        flight.bookPassenger(passenger1);
-        flight.bookPassenger(passenger1);
+        flight.bookPassenger(passenger2);
+        flight.bookPassenger(passenger3);
+        flight.bookPassenger(passenger4);
         flight.bookPassenger(passenger1);
         assertEquals(4, flight.countPassengers());
         assertEquals(0, flight.getNumberOfAvailableSeats());
@@ -122,31 +122,12 @@ public class FlightTest {
     @Test
     public void doesNotDoubleBookSeats(){
         flight.bookPassenger(passenger1);
-        flight.bookPassenger(passenger1);
-        flight.bookPassenger(passenger1);
-        flight.bookPassenger(passenger1);
+        flight.bookPassenger(passenger2);
+        flight.bookPassenger(passenger3);
+        flight.bookPassenger(passenger4);
         ArrayList<Integer> bookedSeats = flight.getAssignedSeats();
         Collections.sort(bookedSeats);
         assertEquals(expectedSeatNumbers, bookedSeats);
     }
 
-
-    @Test
-    public void outputSortedPassengerNumbers(){
-        // Book in 4 passengers and sort by seat number
-        flight.bookPassenger(passenger1);
-        flight.bookPassenger(passenger2);
-        flight.bookPassenger(passenger3);
-        flight.bookPassenger(passenger4);
-        flight.sortPassengersBySeatNumber();
-
-        // Pull out seat numbers and assign to a new ArrayList
-        ArrayList<Integer> output = new ArrayList<>();
-        for(Passenger passenger : flight.getPassengers()){
-            output.add(passenger.getSeatNumber());
-        }
-
-        // Check against [1, 2, 3, 4]
-        assertEquals(expectedSeatNumbers, output);
-    }
 }
