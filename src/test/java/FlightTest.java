@@ -1,6 +1,9 @@
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
 import static org.junit.Assert.assertEquals;
 
 public class FlightTest {
@@ -8,12 +11,14 @@ public class FlightTest {
     private Flight flight;
     private Plane plane;
     private Passenger passenger1;
+    private GregorianCalendar departureTime;
 
     @Before
     public void before(){
         passenger1 = new Passenger("Gertrude Green", 1);
         plane = new Plane(PlaneType.CESSNA);
-        flight = new Flight("EK028", Airport.DXB, Airport.GLA, plane, "13:00 28FEB2020");
+        departureTime = new GregorianCalendar(2020, 2, 28, 13, 0);
+        flight = new Flight("EK028", Airport.DXB, Airport.GLA, plane, departureTime);
     }
 
     @Test
@@ -53,7 +58,7 @@ public class FlightTest {
 
     @Test
     public void hasADepartureTime(){
-        assertEquals("13:00 28FEB2020", flight.getDepartureTime());
+        assertEquals(departureTime, flight.getDepartureTime());
     }
 
     @Test
