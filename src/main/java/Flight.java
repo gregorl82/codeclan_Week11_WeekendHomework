@@ -49,4 +49,8 @@ public class Flight {
     public String getDepartureTime() {
         return departureTime;
     }
+
+    public int getNumberOfAvailableSeats() {
+        return plane.getCapacityFromEnum() - countPassengers();
+    }
 }

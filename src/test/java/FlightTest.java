@@ -55,4 +55,9 @@ public class FlightTest {
         assertEquals("13:00 28FEB2020", flight.getDepartureTime());
     }
 
+    @Test
+    public void canGetNumberOfAvailableSeats(){
+        assertEquals(4, flight.getNumberOfAvailableSeats());
+    }
+
 }
