@@ -4,7 +4,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 public class FlightManagerTest {
 
@@ -16,7 +16,6 @@ public class FlightManagerTest {
     private Passenger passenger3;
     private Passenger passenger4;
     private GregorianCalendar departureTime;
-    private ArrayList<Integer> expectedSeatNumbers;
 
     @Before
     public void before(){
@@ -32,12 +31,6 @@ public class FlightManagerTest {
         flight = new Flight("AB123", Airport.EDI, Airport.GLA, plane, departureTime);
 
         flightManager = new FlightManager();
-
-        expectedSeatNumbers = new ArrayList<>();
-        expectedSeatNumbers.add(1);
-        expectedSeatNumbers.add(2);
-        expectedSeatNumbers.add(3);
-        expectedSeatNumbers.add(4);
     }
 
     @Test
@@ -67,13 +60,27 @@ public class FlightManagerTest {
         flight.bookPassenger(passenger4);
         flightManager.sortPassengersBySeatNumber(flight);
 
-        // Pull out seat numbers and assign to a new ArrayList
-        ArrayList<Integer> output = new ArrayList<>();
-        for(Passenger passenger : flight.getPassengers()){
-            output.add(passenger.getSeatNumber());
-        }
+        // Check each of the passengers are in seat order
+        ArrayList<Passenger> sortedPassengers = flight.getPassengers();
+        assertEquals(1, sortedPassengers.get(0).getSeatNumber());
+        assertEquals(2, sortedPassengers.get(1).getSeatNumber());
+        assertEquals(3, sortedPassengers.get(2).getSeatNumber());
+        assertEquals(4, sortedPassengers.get(3).getSeatNumber());
+    }
 
-        // Check against [1, 2, 3, 4]
-        assertEquals(expectedSeatNumbers, output);
+    @Test
+    public void canGetPassengerBySeatNumber(){
+        flight.bookPassenger(passenger1);
+        flight.bookPassenger(passenger2);
+        flight.bookPassenger(passenger3);
+        flight.bookPassenger(passenger4);
+        Passenger foundPassenger = flightManager.getPassengerBySeatNumber(flight, 2);
+        assertEquals(2, foundPassenger.getSeatNumber());
+    }
+
+    @Test
+    public void cannotFindPassenger(){
+        Passenger foundPassenger = flightManager.getPassengerBySeatNumber(flight, 1);
+        assertNull(foundPassenger);
     }
 }

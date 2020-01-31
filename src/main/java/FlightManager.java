@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class FlightManager {
 
     public int getTotalAvailableWeight(Flight flight) {
@@ -27,5 +29,39 @@ public class FlightManager {
             }
 
         }
+    }
+
+    public Passenger getPassengerBySeatNumber(Flight flight, int seatNumber){
+        sortPassengersBySeatNumber(flight);
+        ArrayList<Passenger> passengers = flight.getPassengers();
+        return binarySearch(passengers, seatNumber);
+    }
+
+    public Passenger binarySearch(ArrayList<Passenger> passengers, int search_number){
+        if (passengers.size() == 0){
+            return null;
+        }
+
+        int midIndex = 0;
+
+        if (passengers.size() > 1){
+            midIndex = (int)Math.ceil((double)passengers.size()/2);
+        }
+
+        Passenger midPoint = passengers.get(midIndex);
+
+        if (midPoint.getSeatNumber() == search_number){
+            return midPoint;
+        }
+
+        ArrayList<Passenger> subSetOfPassengers;
+
+        if (midPoint.getSeatNumber() > search_number){
+            subSetOfPassengers = new ArrayList<>(passengers.subList(0, midIndex));
+        } else {
+            subSetOfPassengers = new ArrayList<>(passengers.subList(midIndex+1, passengers.size()));
+        }
+
+        return binarySearch(subSetOfPassengers, search_number);
     }
 }
