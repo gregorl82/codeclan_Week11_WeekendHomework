@@ -12,14 +12,27 @@ public class FlightTest {
     private Flight flight;
     private Plane plane;
     private Passenger passenger1;
+    private Passenger passenger2;
+    private Passenger passenger3;
+    private Passenger passenger4;
     private GregorianCalendar departureTime;
+    private ArrayList<Integer> expectedSeatNumbers;
 
     @Before
     public void before(){
         passenger1 = new Passenger("Gertrude Green", 1);
+        passenger2 = new Passenger("Yoann Yellow", 2);
+        passenger3 = new Passenger("Polly Purple", 2);
+        passenger4 = new Passenger("Michael Mauve", 1);
+
         plane = new Plane(PlaneType.CESSNA);
         departureTime = new GregorianCalendar(2020, 2, 28, 13, 0);
         flight = new Flight("EK028", Airport.DXB, Airport.GLA, plane, departureTime);
+        expectedSeatNumbers = new ArrayList<>();
+        expectedSeatNumbers.add(1);
+        expectedSeatNumbers.add(2);
+        expectedSeatNumbers.add(3);
+        expectedSeatNumbers.add(4);
     }
 
     @Test
@@ -100,12 +113,6 @@ public class FlightTest {
     }
 
     @Test
-    public void canGenerateRandomSeatNumber(){
-        int generatedNumber = flight.generateSeatNumber();
-        assertNotNull(generatedNumber);
-    }
-
-    @Test
     public void canAssignSeatNumberToPassenger(){
         flight.bookPassenger(passenger1);
         assertNotEquals(0, passenger1.getSeatNumber());
@@ -120,11 +127,26 @@ public class FlightTest {
         flight.bookPassenger(passenger1);
         ArrayList<Integer> bookedSeats = flight.getAssignedSeats();
         Collections.sort(bookedSeats);
-        ArrayList<Integer> expected = new ArrayList<>();
-        expected.add(1);
-        expected.add(2);
-        expected.add(3);
-        expected.add(4);
-        assertEquals(expected, bookedSeats);
+        assertEquals(expectedSeatNumbers, bookedSeats);
+    }
+
+
+    @Test
+    public void outputSortedPassengerNumbers(){
+        // Book in 4 passengers and sort by seat number
+        flight.bookPassenger(passenger1);
+        flight.bookPassenger(passenger2);
+        flight.bookPassenger(passenger3);
+        flight.bookPassenger(passenger4);
+        flight.sortPassengersBySeatNumber();
+
+        // Pull out seat numbers and assign to a new ArrayList
+        ArrayList<Integer> output = new ArrayList<>();
+        for(Passenger passenger : flight.getPassengers()){
+            output.add(passenger.getSeatNumber());
+        }
+
+        // Check against [1, 2, 3, 4]
+        assertEquals(expectedSeatNumbers, output);
     }
 }

@@ -46,12 +46,20 @@ public class Flight {
         return departureAirport.getName();
     }
 
+    public ArrayList<Passenger> getPassengers() {
+        return passengers;
+    }
+
     public int countPassengers() {
         return passengers.size();
     }
 
     public GregorianCalendar getDepartureTime() {
         return departureTime;
+    }
+
+    public ArrayList<Integer> getAssignedSeats() {
+        return assignedSeats;
     }
 
     public int getNumberOfAvailableSeats() {
@@ -90,7 +98,20 @@ public class Flight {
         return seatNumber;
     }
 
-    public ArrayList<Integer> getAssignedSeats() {
-        return assignedSeats;
+    public void sortPassengersBySeatNumber() {
+        int length = countPassengers();
+
+        for(int i = 0; i < length - 1; i++){
+
+            for(int j = 1; j < length - i; j++){
+                Passenger firstPassenger = passengers.get(j-1);
+                Passenger secondPassenger = passengers.get(j);
+                if(firstPassenger.getSeatNumber() > secondPassenger.getSeatNumber()){
+                    passengers.set(j-1, secondPassenger);
+                    passengers.set(j, firstPassenger);
+                }
+            }
+
+        }
     }
 }
