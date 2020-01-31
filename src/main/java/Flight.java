@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.Random;
 
 public class Flight {
 
@@ -9,6 +10,7 @@ public class Flight {
     private Plane plane;
     private GregorianCalendar departureTime;
     private ArrayList<Passenger> passengers;
+    private ArrayList<Integer> assignedSeats;
 
     public Flight(String flightNumber, Airport destination, Airport departureAirport, Plane plane, GregorianCalendar departureTime) {
         this.flightNumber = flightNumber;
@@ -17,6 +19,7 @@ public class Flight {
         this.plane = plane;
         this.departureTime = departureTime;
         this.passengers = new ArrayList<>();
+        this.assignedSeats = new ArrayList<>();
     }
 
     public Plane getPlane() {
@@ -68,5 +71,16 @@ public class Flight {
             numberOfBags += passenger.getNumberOfBags();
         }
         return numberOfBags;
+    }
+
+    public int countAssignedSeats() {
+        return assignedSeats.size();
+    }
+
+    public int generateSeatNumber() {
+        int totalSeats = plane.getCapacityFromEnum();
+        Random rand = new Random();
+        int seatNumber = rand.nextInt(totalSeats) + 1;
+        return seatNumber;
     }
 }

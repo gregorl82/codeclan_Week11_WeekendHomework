@@ -4,6 +4,7 @@ import org.junit.Test;
 import java.util.GregorianCalendar;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 public class FlightTest {
 
@@ -61,6 +62,11 @@ public class FlightTest {
     }
 
     @Test
+    public void assignedSeatsStartsEmpty(){
+        assertEquals(0, flight.countAssignedSeats());
+    }
+
+    @Test
     public void canGetNumberOfAvailableSeats(){
         assertEquals(4, flight.getNumberOfAvailableSeats());
     }
@@ -90,6 +96,12 @@ public class FlightTest {
         flight.bookPassenger(passenger1);
         flight.bookPassenger(passenger1);
         assertEquals(3, flight.countPassengerBags());
+    }
+
+    @Test
+    public void canGenerateRandomSeatNumber(){
+        int generatedNumber = flight.generateSeatNumber();
+        assertNotNull(generatedNumber);
     }
 
 
