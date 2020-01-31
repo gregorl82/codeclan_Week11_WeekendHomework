@@ -6,10 +6,13 @@ import static org.junit.Assert.assertEquals;
 public class FlightTest {
 
     private Flight flight;
+    private Plane plane;
+    private Passenger passenger1;
 
     @Before
     public void before(){
-        flight = new Flight();
+        plane = new Plane(PlaneType.CESSNA);
+        flight = new Flight("EK028", Airport.DXB, Airport.GLA, plane);
     }
 
     @Test
