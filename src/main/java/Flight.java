@@ -59,4 +59,12 @@ public class Flight {
             passengers.add(passenger);
         }
     }
+
+    public int countPassengerBags() {
+        int numberOfBags = 0;
+        for (Passenger passenger : passengers){
+            numberOfBags += passenger.getNumberOfBags();
+        }
+        return numberOfBags;
+    }
 }

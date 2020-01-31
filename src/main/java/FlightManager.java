@@ -1,12 +1,14 @@
 public class FlightManager {
 
-    private Flight flight;
-
-    public FlightManager(Flight flight) {
-        this.flight = flight;
+    public int getTotalAvailableWeight(Flight flight) {
+        return flight.getPlane().getTotalWeightFromEnum()/2;
     }
 
-    public Flight getFlight() {
-        return flight;
+    public int getWeightOfPassengerBaggage(Flight flight) {
+        return flight.countPassengerBags() * 20;
+    }
+
+    public int getRemainingWeightForBaggage(Flight flight) {
+        return getTotalAvailableWeight(flight) - getWeightOfPassengerBaggage(flight);
     }
 }

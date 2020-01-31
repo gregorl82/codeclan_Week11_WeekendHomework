@@ -79,4 +79,13 @@ public class FlightTest {
         assertEquals(0, flight.getNumberOfAvailableSeats());
     }
 
+    @Test
+    public void canCountTheNumberOfPassengerBags(){
+        flight.bookPassenger(passenger1);
+        flight.bookPassenger(passenger1);
+        flight.bookPassenger(passenger1);
+        assertEquals(3, flight.countPassengerBags());
+    }
+
+
 }
