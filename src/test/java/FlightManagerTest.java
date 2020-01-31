@@ -14,7 +14,7 @@ public class FlightManagerTest {
     public void before(){
         plane = new Plane(PlaneType.CESSNA);
         passenger1 = new Passenger("Bobby Blue", 2);
-        flight = new Flight("AB123", Airport.EDI, Airport.GLA, plane, "08:00 01JAN2020")
+        flight = new Flight("AB123", Airport.EDI, Airport.GLA, plane, "08:00 01JAN2020");
         flightManager = new FlightManager(flight);
     }
 
