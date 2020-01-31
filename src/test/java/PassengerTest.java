@@ -1,8 +1,8 @@
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 public class PassengerTest {
 
@@ -25,12 +25,23 @@ public class PassengerTest {
 
     @Test
     public void passengerFlightStartsNull(){
-        Assert.assertNull(passenger.getFlight());
+        assertNull(passenger.getFlight());
     }
 
     @Test
     public void canSetPassengerFlight(){
         passenger.setFlight("BA151");
         assertEquals("BA151", passenger.getFlight());
+    }
+
+    @Test
+    public void passengerSeatNumberStartsZero(){
+        assertEquals(0, passenger.getSeatNumber());
+    }
+
+    @Test
+    public void canSetPassengerSeatNumber(){
+        passenger.setSeatNumber(5);
+        assertEquals(5, passenger.getSeatNumber());
     }
 }
