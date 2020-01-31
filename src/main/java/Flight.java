@@ -60,8 +60,14 @@ public class Flight {
 
     public void bookPassenger(Passenger passenger) {
         if(getNumberOfAvailableSeats() > 0){
+            int seatNumber = generateSeatNumber();
+            while (assignedSeats.contains(seatNumber)){
+                seatNumber = generateSeatNumber();
+            }
+            passenger.setSeatNumber(seatNumber);
             passenger.setFlight(flightNumber);
             passengers.add(passenger);
+            assignedSeats.add(seatNumber);
         }
     }
 
@@ -82,5 +88,9 @@ public class Flight {
         Random rand = new Random();
         int seatNumber = rand.nextInt(totalSeats) + 1;
         return seatNumber;
+    }
+
+    public ArrayList<Integer> getAssignedSeats() {
+        return assignedSeats;
     }
 }

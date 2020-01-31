@@ -1,10 +1,11 @@
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.GregorianCalendar;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 public class FlightTest {
 
@@ -104,5 +105,26 @@ public class FlightTest {
         assertNotNull(generatedNumber);
     }
 
+    @Test
+    public void canAssignSeatNumberToPassenger(){
+        flight.bookPassenger(passenger1);
+        assertNotEquals(0, passenger1.getSeatNumber());
+        assertEquals(1, flight.countAssignedSeats());
+    }
 
+    @Test
+    public void doesNotDoubleBookSeats(){
+        flight.bookPassenger(passenger1);
+        flight.bookPassenger(passenger1);
+        flight.bookPassenger(passenger1);
+        flight.bookPassenger(passenger1);
+        ArrayList<Integer> bookedSeats = flight.getAssignedSeats();
+        Collections.sort(bookedSeats);
+        ArrayList<Integer> expected = new ArrayList<>();
+        expected.add(1);
+        expected.add(2);
+        expected.add(3);
+        expected.add(4);
+        assertEquals(expected, bookedSeats);
+    }
 }
