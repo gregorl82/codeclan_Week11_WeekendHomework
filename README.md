@@ -18,6 +18,9 @@
 <ul>
 <li>an enum PlaneType (e.g. BOEING747) which stores capacity and total weight</li>
 <li>an empty list of booked Passengers</li>
+</ul>
+<p>Create a Flight class which has:</p>
+<ul>
 <li>a Plane</li>
 <li>flight number (i.e. “FR756”)</li>
 <li>destination (i.e. GLA, EDI)</li>
